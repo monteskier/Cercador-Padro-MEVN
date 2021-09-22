@@ -1,17 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const Padro = require('../models/Padro');
-router.get('/', async (req, res) =>{
-        const padrons = await Padro.find();     
-        //res.json(padrons);
+router.get('/', async(req, res) =>{
+        /*const padrons = Padro.findOne({dni:'39383423V'});     
+        await console.log(res.json(padrons));*/
     });    
 router.post('/find', (req,res )=>{      
     req.body.dni = req.body.dni.toUpperCase();
     Padro.findOne({dni:req.body.dni}, function(err,obj){
         if(err){
             console.log("hi ha un error!!");
-            res.json({ "status":"No s'han trobat les dades"});
+            throw(err);
         }else{
+            console.log("objeto = "+obj)
             res.json(obj);            
         }
     });
