@@ -11,12 +11,18 @@
                             <form @submit.prevent="searchPadro">
                                 <div class="form-group">
                                     <input id="dni" v-model="padro.dni" role="alert" type="text" placeholder="Inserta el DNI/NIE" class="form-con">
-                                    <button class="btn btn-primary btn-block">Consultar</button>                                
+                                    <button class="btn btn-primary btn-block">Consultar</button>
+                                    <div class="icon">
+                                        <i class="bi-file-pdf"></i>
+                                    </div>
+                                    <div class="pl-3 data">
+                                        <p class="m-0"><a :href="'./docs/SVC_2021_Val_Dinar_Gent_Gran.pdf'">Descarregar Formulari</a></p>
+                                    </div>                                        
                                 </div>                                
                             </form>
                         </div>
                     </div>
-                </div>
+                </div>                
                 <div class="col-md5">
                     <div class="card">
                         <div class="card-body">    
@@ -25,9 +31,11 @@
                         <div class="card-body" v-if="padroResult.dni">
                             <p> DNI: {{padroResult.dni}}</p>
                             <p> EDAT: {{padroResult.edat}}</p>
-                            <p v-if="padroResult.entregat">ENTREGAT : Si</p>
-                            <p v-else>ENTREGAT : No</p>
-                            <button class="btn btn-primary btn-block" v-on:click="marcar(padroResult._id)">Marcar</button>
+                            <p v-if="padroResult.entregat">ENTREGAT : Si, <b>no es pot tornar a donar.</b></p>
+                            <div v-else><p>ENTREGAT : Encara no... podeu fer el tiquet.</p>
+                                <button class="btn btn-primary btn-block" v-on:click="marcar(padroResult._id)">Marcar</button>                                
+                            </div>
+                            
                         </div>                            
                     </div>
                 </div>
